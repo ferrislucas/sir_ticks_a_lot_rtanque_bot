@@ -26,17 +26,6 @@ class SirTicksALotBot < RTanque::Bot::Brain
     end
   end
 
-  def get_radar_lock
-    @locked_on ||= nil
-    lock = if @locked_on
-      sensors.radar.find { |reflection| reflection.name == @locked_on } || sensors.radar.first
-    else
-      sensors.radar.first
-    end
-    @locked_on = lock.name if lock
-    lock
-  end
-
   def find_closest_victim
     victims = sensors.radar.find#.to_a
     return nil if victims.count == 0
@@ -44,7 +33,6 @@ class SirTicksALotBot < RTanque::Bot::Brain
 
     #puts "#{victims.map{|c| "#{c.name} (#{c.distance})"}} #{target.name} (#{target.distance})" if victims.count > 1
 
-    return target if target
-    nil
+    target
   end
 end
