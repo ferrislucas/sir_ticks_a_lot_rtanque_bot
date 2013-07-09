@@ -27,7 +27,7 @@ class SirTicksALotBot < RTanque::Bot::Brain
   end
 
   def find_closest_victim
-    victims = sensors.radar.find#.to_a
+    victims = sensors.radar.find
     return nil if victims.count == 0
     target = victims.sort_by{|x| x.distance}.first
 
