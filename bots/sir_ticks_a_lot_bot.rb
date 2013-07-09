@@ -16,10 +16,10 @@ class SirTicksALotBot < RTanque::Bot::Brain
   end
 
   def destroy_lock(reflection)
-    command.heading = reflection.heading
+    #command.heading = reflection.heading
     command.radar_heading = reflection.heading
     command.turret_heading = reflection.heading
-    command.speed = reflection.distance > 200 ? MAX_BOT_SPEED : MAX_BOT_SPEED / 2.0
+    #command.speed = reflection.distance > 200 ? MAX_BOT_SPEED : MAX_BOT_SPEED / 2.0
     if (reflection.heading.delta(sensors.turret_heading)).abs < TURRET_FIRE_RANGE
       command.fire(reflection.distance > 200 ? MAX_FIRE_POWER : MIN_FIRE_POWER)
     end
