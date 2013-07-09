@@ -7,8 +7,8 @@ class SirTicksALotBot < RTanque::Bot::Brain
     command.heading = sensors.heading + (RTanque::Heading::ONE_DEGREE * 90)
     command.speed = MAX_BOT_SPEED
 
-    if (lock = find_closest_victim)
-      destroy_lock(lock)
+    if (target = find_closest_victim)
+      shoot_at(target)
     else
       command.turret_heading = sensors.heading + (RTanque::Heading::ONE_DEGREE * 33)
       command.radar_heading = command.turret_heading
@@ -18,7 +18,7 @@ class SirTicksALotBot < RTanque::Bot::Brain
 
   private
 
-  def destroy_lock(reflection)
+  def shoot_at(reflection)
     command.radar_heading = reflection.heading
     command.turret_heading = reflection.heading
     if (reflection.heading.delta(sensors.turret_heading)).abs < TURRET_FIRE_RANGE
